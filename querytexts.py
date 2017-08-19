@@ -117,4 +117,6 @@ class Query:
 	Find the cosine distance between each document and the query, and put the results in descending order.
 """
 
-q = Query(['pg135.txt', 'pg76.txt', 'pg5200.txt'])
+q = Query(['corpus/pg135.txt', 'corpus/pg76.txt', 'corpus/pg5200.txt'])
+resu = q.one_word_query('cake')
+print(resu)

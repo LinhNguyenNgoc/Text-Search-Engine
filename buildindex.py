@@ -6,6 +6,13 @@ import math
 
 
 class BuildIndex:
+    '''
+        There are two main stages in developing this:
+            building the index,
+            and then using the index to answer queries.
+
+        http://aakashjapi.com/fuckin-search-engines-how-do-they-work/
+    '''
     def __init__(self, files):
         self.tf = {}
         self.df = {}
@@ -21,13 +28,13 @@ class BuildIndex:
     def process_files(self):
         file_to_terms = {}
         for file in self.filenames:
-            # stopwords = open('stopwords.txt').read().close()
-            pattern = re.compile('[\W_]+')
+            stopwords = open('stopwords.txt').read()
+            pattern = re.compile('[\W_]+')  # Find the non words pattern
             file_to_terms[file] = open(file, 'r').read().lower();
             file_to_terms[file] = pattern.sub(' ', file_to_terms[file])
             re.sub(r'[\W_]+', '', file_to_terms[file])
             file_to_terms[file] = file_to_terms[file].split()
-            # file_to_terms[file] = [w for w in file_to_terms[file] if w not in stopwords]
+            file_to_terms[file] = [w for w in file_to_terms[file] if w not in stopwords]
             # file_to_terms[file] = [stemmer.stem_word(w) for w in file_to_terms[file]]
         return file_to_terms
 
